@@ -12,10 +12,10 @@
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="preload" as="font" type="font/woff2" href="/fonts/fredoka-hebrew-600-normal.woff2" crossorigin>
 <link rel="preload" as="font" type="font/woff2" href="/fonts/rubik-hebrew-400-normal.woff2" crossorigin>
-<link rel="stylesheet" href="/assets/site.css?v=1">
+<link rel="stylesheet" href="/assets/site.css?v=2">
 <meta name="robots" content="noindex">
-<!-- Google tag (GA4 + Google Ads, same ids as the old Wix site) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-6X06C72BQS"></script>
+<!-- Google tag (GA4 + Google Ads, same ids as the old Wix site). Loaded by the Ads id: Google answers 404 for the GA4 id's loader, which would stop both. -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=AW-693544629"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date());gtag("config","G-6X06C72BQS");gtag("config","AW-693544629");</script>
 <!-- Meta pixel -->
 <script>!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version="2.0";n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,"script","https://connect.facebook.net/en_US/fbevents.js");fbq("init","1591343278262185");fbq("track","PageView");</script>
@@ -93,7 +93,11 @@
 <div class="field"><label for="f-email">אימייל <span class="req" aria-hidden="true">*</span></label><input id="f-email" name="email" type="email" required autocomplete=email dir="ltr"></div><div class="field"><label for="f-id_number">תעודת זהות <span class="req" aria-hidden="true">*</span></label><input id="f-id_number" name="id_number" type="text" required inputmode="numeric" dir="ltr" pattern="[0-9]{5,9}"></div>
 <div class="field"><label for="f-age">גיל <span class="req" aria-hidden="true">*</span></label><input id="f-age" name="age" type="number" required min="8" max="120" inputmode="numeric"></div><div class="field"><label for="f-instagram">שם באינסטגרם (או קישור)</label><input id="f-instagram" name="instagram" type="text" dir="ltr"></div>
 <div class="field"><label for="f-order_number">מספר הזמנה</label><input id="f-order_number" name="order_number" type="text" dir="ltr" inputmode="numeric"></div><div class="field"><label for="f-workshop_date">תאריך הסדנה <span class="req" aria-hidden="true">*</span></label><input id="f-workshop_date" name="workshop_date" type="date" required ></div>
-</div></fieldset>
+</div>
+<div id="parentBox" hidden style="margin-top:18px"><div class="callout"><b>משתתף מתחת לגיל 18</b><p>ההורה ממלא כאן את הפרטים שלו ומאשר את ההשתתפות.</p></div>
+<div class="grid2" style="margin-top:14px"><div class="field"><label for="f-parent_name">שם ההורה</label><input id="f-parent_name" name="parent_name" type="text" data-preq autocomplete="off"></div><div class="field"><label for="f-parent_phone">טלפון ההורה</label><input id="f-parent_phone" name="parent_phone" type="tel" data-preq inputmode="tel" dir="ltr"></div></div>
+<label class="check" style="margin-top:10px"><input type="checkbox" name="parent_consent" value="מאשר/ת" data-preq> אני ההורה או האפוטרופוס של המשתתף/ת, מאשר/ת את ההשתתפות בסדנה ואת ההצהרה שבטופס.</label></div>
+</fieldset>
 <fieldset class="fset"><legend>הצהרת בריאות</legend><div class="decl" role="radiogroup" aria-labelledby="d1t" aria-required="true"><p id="d1t">למיטב ידיעתי, מצב בריאותי בעת חתימת הצהרה זו תקין ואינני חולה בכל מחלה שהיא לרבות, מוגבלות ו/או ליקוי גופני ו/או נפשי (להלן: &quot;מחלה&quot;).</p>
 <div class="opts"><label class="check"><input type="radio" name="declaration_1" value="מאשר/ת"> מצהיר/ה, מאשר/ת ומתחייב/ת</label>
 <label class="check"><input type="radio" name="declaration_1" value="אחר"> אחר:</label><input class="other-in" name="declaration_1_other" aria-label="פירוט (אחר)" disabled></div></div><div class="decl" role="radiogroup" aria-labelledby="d2t" aria-required="true"><p id="d2t">למיטב ידיעתי, אינני סובל ממגבלה פיזית. אני מודע לכך שהעבודה עם כלים מכניים כוללת רעידות.</p>
@@ -135,7 +139,7 @@
         <img class="foot-logo" src="/images/web/logo.webp" width="872" height="498" alt="Carpet DM">
         <p>סדנת השטיחים הוותיקה והפעילה בישראל.</p>
         <form class="news" id="newsForm" name="newsletter" method="POST" data-netlify="true" netlify-honeypot="bot-field"><input type="hidden" name="form-name" value="newsletter"><p class="honey"><label>לא למילוי <input name="bot-field" tabindex="-1" autocomplete="off"></label></p><label class="sr" for="nEmail">אימייל לניוזלטר</label><input id="nEmail" name="email" type="email" required placeholder="המייל שלכם" dir="ltr" style="text-align:right"><button class="btn btn-ghost btn-sm" type="submit">הצטרפות</button></form>
-        <p style="margin-top:8px;font-size:.88rem">חברי הניוזלטר יכולים לתת 5% הנחה למשתתפים חדשים.</p>
+        <p style="margin-top:8px;font-size:.88rem">מיילים על סדנאות ומבצעים, אפשר להסיר בכל עת. חברי הניוזלטר יכולים לתת 5% הנחה למשתתפים חדשים.</p>
       </div>
       <div>
         <h2>הסטודיו</h2>
@@ -162,6 +166,7 @@
         <ul>
           <li><a href="https://www.instagram.com/carpet___dm/">אינסטגרם</a> · <a href="https://www.tiktok.com/@carpet_dm">טיקטוק</a></li>
           <li><a href="/terms/">תנאי שימוש וביטולים</a></li>
+          <li><a href="/cancel/">ביטול עסקה</a></li>
           <li><a href="/privacy/">מדיניות פרטיות</a></li>
           <li><a href="/accessibility/">הצהרת נגישות</a></li>
           <li><span lang="en">English</span>: <a href="/#workshops" lang="en">workshops in English</a></li>
@@ -171,7 +176,7 @@
     <div class="foot-bottom"><span>© Carpet DM · גולדן טאצ׳</span><span>הזמנות ותשלום מאובטח דרך Monkeybook ו-Grow</span></div>
   </div>
 </footer>
-<script src="/assets/site.js?v=1" defer></script>
+<script src="/assets/site.js?v=2" defer></script>
 
 </body>
 </html>

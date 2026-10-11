@@ -11,7 +11,7 @@
   const cart = () => (window.CDM_CART && window.CDM_CART.items) || [];
   let method = "pickup";
 
-  $("#shipOpts").innerHTML = Object.entries(DELIVERY).map(([k, d]) => `<label class="${d.price == null ? "off" : ""}"><input type="radio" name="ship" value="${k}"${k === method ? " checked" : ""}${d.price == null ? " disabled" : ""}><span>${esc(d.label)}</span><b>${d.price == null ? "בקרוב" : d.price ? nis(d.price) : "חינם"}</b></label>`).join("");
+  $("#shipOpts").innerHTML = Object.entries(DELIVERY).filter(([, d]) => d.price != null).map(([k, d]) => `<label class="${d.price == null ? "off" : ""}"><input type="radio" name="ship" value="${k}"${k === method ? " checked" : ""}${d.price == null ? " disabled" : ""}><span>${esc(d.label)}</span><b>${d.price == null ? "בקרוב" : d.price ? nis(d.price) : "חינם"}</b></label>`).join("");
   $("#shipOpts").addEventListener("change", (e) => { method = e.target.value; $("#addrBox").hidden = method !== "courier"; ["#sAddr", "#sCity"].forEach(s => $(s).required = method === "courier"); render(); });
 
   function total() { return cart().reduce((a, c) => a + c.price * c.qty, 0) + (DELIVERY[method].price || 0); }

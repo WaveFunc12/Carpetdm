@@ -82,6 +82,26 @@
     setTimeout(() => b.textContent = "העתקת הפרומפט", 2200);
   }));
 
+  // ===== Cancel a purchase =====
+  const cancel = $("#cancelForm");
+  if (cancel) {
+    cancel.addEventListener("input", () => $(".form-err", cancel).classList.remove("show"));
+    cancel.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const err = $(".form-err", cancel), bad = cancel.querySelector(":invalid");
+      if (bad) { err.textContent = "חסר משהו בטופס."; err.classList.add("show"); bad.reportValidity(); return; }
+      const btn = $("button[type=submit]", cancel); btn.disabled = true; btn.textContent = "שולח…";
+      try {
+        await send(cancel);
+        $("#cancelStamp").textContent = `נשלח ב-${new Date().toLocaleString("he-IL")} · הזמנה ${cancel.elements.order_number.value}`;
+        cancel.hidden = true; $("#cancelSent").hidden = false; $("#cancelSent").focus();
+      } catch {
+        err.innerHTML = `השליחה לא הצליחה. נסו שוב, או שלחו את הבקשה במייל studio.shaket@gmail.com.`; err.classList.add("show");
+        btn.disabled = false; btn.textContent = "שליחת בקשת הביטול";
+      }
+    });
+  }
+
   // ===== Health declaration + rug choice =====
   const form = $("#declForm");
   if (!form) return;
@@ -109,6 +129,14 @@
     });
   };
   modes.forEach(m => m.addEventListener("change", showMode)); showMode();
+
+  // under 18: a parent fills in their details and approves
+  const age = form.elements.age, parent = $("#parentBox", form);
+  const showParent = () => {
+    const minor = +age.value > 0 && +age.value < 18;
+    parent.hidden = !minor; $$("[data-preq]", parent).forEach(i => i.required = minor);
+  };
+  age.addEventListener("input", showParent); showParent();
 
   // declarations: "agree" or "other" with a note
   $$(".decl", form).forEach(d => {
