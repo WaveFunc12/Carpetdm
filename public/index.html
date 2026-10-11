@@ -594,6 +594,31 @@ dialog.co::backdrop{background:rgba(20,38,42,.55);-webkit-backdrop-filter:blur(3
 .mb-alt{padding:10px var(--gutter) 4px;text-align:center;font-size:.85rem;color:var(--muted)}
 .mb-alt a{color:inherit}
 @media (max-width:979px){.bk-how-step{display:none}}
+
+/* Phone: the steps are a swipe row under the rug instead of four pinned screens. */
+.how-dots{display:none}
+@media (max-width:899px){
+  .how .sec-lede{margin-top:10px}
+  .how-grid{gap:10px;margin-top:18px}
+  .stage{position:relative;top:auto;height:min(36svh,300px);padding:0;margin:0;box-shadow:none;background:none}
+  .stage svg{height:min(36svh,300px);width:auto;aspect-ratio:1}
+  .how-dots{display:flex;gap:6px;direction:rtl}
+  .how-dots button{flex:1;height:24px;padding:0;border:0;background:none;cursor:pointer;display:grid;align-items:center}
+  .how-dots span{display:block;height:4px;border-radius:2px;background:rgba(255,255,255,.2);overflow:hidden}
+  .how-dots i{display:block;height:100%;width:0;background:var(--mustard);border-radius:inherit}
+  .how-dots .done i{width:100%}
+  .how-dots .cur i{width:100%;transition:width .3s ease}
+  .how-dots.auto .cur i{width:0;animation:howFill var(--how-t,5s) linear forwards}
+  @keyframes howFill{to{width:100%}}
+  .steps{grid-auto-flow:column;grid-auto-columns:86%;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;overscroll-behavior-x:contain;scrollbar-width:none;margin-inline:calc(var(--gutter)*-1);padding-inline:var(--gutter);scroll-padding-inline:var(--gutter)}
+  .steps::-webkit-scrollbar{display:none}
+  .step{min-height:0;padding:0;scroll-snap-align:start}
+  .step-card{padding:18px;grid-template-columns:1fr 80px;gap:14px}
+  .step-ph{width:80px}
+  .step h3{font-size:1.35rem}
+  .step p{font-size:.97rem}
+  .how-end{margin-top:18px;padding:18px}
+}
 </style>
 <!-- Google tag (GA4 + Google Ads, same ids as the old Wix site). Loaded by the Ads id: Google answers 404 for the GA4 id's loader, which would stop both. -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=AW-693544629"></script>
@@ -800,6 +825,7 @@ dialog.co::backdrop{background:rgba(20,38,42,.55);-webkit-backdrop-filter:blur(3
           </g>
         </svg>
       </div>
+      <div class="how-dots" role="tablist" aria-label="שלבי הסדנה"><button type="button" role="tab" aria-label="שלב 1 מתוך 4"><span><i></i></span></button><button type="button" role="tab" aria-label="שלב 2 מתוך 4"><span><i></i></span></button><button type="button" role="tab" aria-label="שלב 3 מתוך 4"><span><i></i></span></button><button type="button" role="tab" aria-label="שלב 4 מתוך 4"><span><i></i></span></button></div>
       <ol class="steps">
         <li class="step" data-step="1"><div class="step-card"><div><p class="step-n">1 / 4</p><h3>בוחרים עיצוב</h3><p>מתוך הקטלוג שלנו (כ-150 סקיצות, כולן ברמת מתחילים) או ציור ותמונה משלכם. שולחים עד 4 ימים לפני, ואנחנו מכינים מראש את כל הצמרים.</p></div><div class="step-ph"><img src="images/web/studio.webp" width="1000" height="1333" alt="הסטודיו: מדפי צמר ועמדות עבודה מוכנות" loading="lazy" decoding="async"></div></div></li>
         <li class="step" data-step="2"><div class="step-card"><div><p class="step-n">2 / 4</p><h3>הסקיצה כבר על הבד</h3><p>מקרינים את העיצוב על בד הטאפטינג המתוח ומסמנים את קווי המתאר. כשאתם מגיעים, העמדה מחכה עם הסקיצה, המסגרת והצבעים.</p></div><div class="step-ph"><img src="images/web/step-sketch.webp" width="1100" height="1467" alt="מסגרת עם סקיצה של ארנב מסומנת על הבד" loading="lazy" decoding="async"></div></div></li>
@@ -1541,7 +1567,8 @@ window.addEventListener("DOMContentLoaded", () => {
     const svg = "#rugSvg";
     gsap.set(`${svg} .ln`, { strokeDasharray: 1, strokeDashoffset: 1 });
     gsap.set(`${svg} .fill`, { opacity: 0 });
-    const rug = gsap.timeline({ defaults: { ease: "none" }, scrollTrigger: { trigger: ".steps", start: "top 65%", end: "bottom 75%", scrub: .6 } });
+    const phoneHow = matchMedia("(max-width: 899px)").matches;
+    const rug = gsap.timeline({ defaults: { ease: "none" }, paused: phoneHow, scrollTrigger: phoneHow ? undefined : { trigger: ".steps", start: "top 65%", end: "bottom 75%", scrub: .6 } });
     rug.addLabel("s1")
       .fromTo(`${svg} #frame`, { opacity: .35, scale: .94, transformOrigin: "50% 50%" }, { opacity: 1, scale: 1, duration: 1 })
       .addLabel("s2")
@@ -1561,7 +1588,9 @@ window.addEventListener("DOMContentLoaded", () => {
       .to(`${svg} #rug`, { y: -16, rotate: -8, transformOrigin: "50% 50%", duration: .8 }, "<")
       .to(`${svg} #rugShadow`, { opacity: 1, duration: .8 }, "<")
       .to(`${svg} #tag`, { opacity: 1, duration: .4 }, "-=.3");
-    document.querySelectorAll(".step").forEach(st => ScrollTrigger.create({ trigger: st, start: "top 60%", end: "bottom 60%", toggleClass: { targets: st, className: "on" } }));
+    const stops = ["s2", "s3", "s4", rug.duration()];
+    if (phoneHow) document.addEventListener("howstep", (e) => rug.tweenTo(stops[e.detail], { duration: 1.6, ease: "power1.inOut" }));
+    else document.querySelectorAll(".step").forEach(st => ScrollTrigger.create({ trigger: st, start: "top 60%", end: "bottom 60%", toggleClass: { targets: st, className: "on" } }));
 
     // 3. Cards, quotes and panels rise as they arrive.
     gsap.utils.toArray(".sec-h").forEach(h => SplitText.create(h, { type: "lines", mask: "lines", autoSplit: true, onSplit: (self) =>
@@ -1718,6 +1747,59 @@ window.addEventListener("DOMContentLoaded", () => {
 });
 </script>
 
+
+<script>
+/* Phone "how" row: which step is showing, the story bars, and a gentle auto-advance until the visitor touches it. */
+(() => {
+  const mq = matchMedia("(max-width: 899px)");
+  const row = document.querySelector(".steps"), dots = document.querySelector(".how-dots");
+  if (!mq.matches || !row || !dots) return;
+  const cards = [...row.children], bars = [...dots.children];
+  const still = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const T = 5000;
+  let cur = -1, timer = 0, auto = !still, seen = false;
+  const pad = () => parseFloat(getComputedStyle(row).paddingRight) || 0;
+  const goTo = (i) => {
+    const target = row.getBoundingClientRect().right - pad();
+    row.scrollBy({ left: cards[i].getBoundingClientRect().right - target, behavior: still ? "auto" : "smooth" });
+  };
+  const set = (i) => {
+    if (i === cur) return;
+    cur = i;
+    cards.forEach((c, k) => c.classList.toggle("on", k === i));
+    bars.forEach((b, k) => { b.classList.toggle("done", k < i); b.classList.toggle("cur", k === i); b.setAttribute("aria-selected", k === i); });
+    const fill = bars[i].querySelector("i"); fill.style.animation = "none"; fill.offsetWidth; fill.style.animation = "";
+    if (seen) document.dispatchEvent(new CustomEvent("howstep", { detail: i }));
+    schedule();
+  };
+  const schedule = () => {
+    clearTimeout(timer);
+    if (!auto || !seen || cur >= cards.length - 1) { dots.classList.remove("auto"); return; }
+    dots.classList.add("auto");
+    timer = setTimeout(() => goTo(cur + 1), T);
+  };
+  const stopAuto = () => { if (!auto) return; auto = false; schedule(); };
+  let raf = 0;
+  row.addEventListener("scroll", () => {
+    cancelAnimationFrame(raf);
+    raf = requestAnimationFrame(() => {
+      const target = row.getBoundingClientRect().right - pad();
+      let best = 0, d = Infinity;
+      cards.forEach((c, k) => { const x = Math.abs(c.getBoundingClientRect().right - target); if (x < d) { d = x; best = k; } });
+      set(best);
+    });
+  }, { passive: true });
+  ["pointerdown", "touchstart", "wheel"].forEach(ev => row.addEventListener(ev, stopAuto, { passive: true }));
+  bars.forEach((b, k) => b.addEventListener("click", () => { stopAuto(); goTo(k); }));
+  dots.style.setProperty("--how-t", T + "ms");
+  set(0);
+  // Start when the row is on screen; pause the auto-advance while it is off screen.
+  new IntersectionObserver(([e]) => {
+    if (e.isIntersecting && !seen) { seen = true; document.dispatchEvent(new CustomEvent("howstep", { detail: cur })); }
+    if (e.isIntersecting) schedule(); else { clearTimeout(timer); dots.classList.remove("auto"); }
+  }, { threshold: .6 }).observe(row);
+})();
+</script>
 <dialog class="co" id="shopCo" aria-labelledby="shopTitle">
   <div class="sheet shop-sheet" id="shopSheet">
     <button class="x" type="button" id="shopClose" aria-label="סגירה">✕</button>

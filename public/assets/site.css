@@ -210,6 +210,31 @@ dialog.co::backdrop{background:rgba(20,38,42,.55);-webkit-backdrop-filter:blur(3
 .mb-alt a{color:inherit}
 @media (max-width:979px){.bk-how-step{display:none}}
 
+/* Phone: the steps are a swipe row under the rug instead of four pinned screens. */
+.how-dots{display:none}
+@media (max-width:899px){
+  .how .sec-lede{margin-top:10px}
+  .how-grid{gap:10px;margin-top:18px}
+  .stage{position:relative;top:auto;height:min(36svh,300px);padding:0;margin:0;box-shadow:none;background:none}
+  .stage svg{height:min(36svh,300px);width:auto;aspect-ratio:1}
+  .how-dots{display:flex;gap:6px;direction:rtl}
+  .how-dots button{flex:1;height:24px;padding:0;border:0;background:none;cursor:pointer;display:grid;align-items:center}
+  .how-dots span{display:block;height:4px;border-radius:2px;background:rgba(255,255,255,.2);overflow:hidden}
+  .how-dots i{display:block;height:100%;width:0;background:var(--mustard);border-radius:inherit}
+  .how-dots .done i{width:100%}
+  .how-dots .cur i{width:100%;transition:width .3s ease}
+  .how-dots.auto .cur i{width:0;animation:howFill var(--how-t,5s) linear forwards}
+  @keyframes howFill{to{width:100%}}
+  .steps{grid-auto-flow:column;grid-auto-columns:86%;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;overscroll-behavior-x:contain;scrollbar-width:none;margin-inline:calc(var(--gutter)*-1);padding-inline:var(--gutter);scroll-padding-inline:var(--gutter)}
+  .steps::-webkit-scrollbar{display:none}
+  .step{min-height:0;padding:0;scroll-snap-align:start}
+  .step-card{padding:18px;grid-template-columns:1fr 80px;gap:14px}
+  .step-ph{width:80px}
+  .step h3{font-size:1.35rem}
+  .step p{font-size:.97rem}
+  .how-end{margin-top:18px;padding:18px}
+}
+
 /* ---------- Inner pages: same cloth, label header and footer as the home page ---------- */
 .page{padding-top:calc(var(--head) + 40px)}
 .page-hero{padding-block:clamp(28px,5vw,64px) clamp(28px,4vw,48px)}
