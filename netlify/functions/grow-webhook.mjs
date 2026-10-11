@@ -1,6 +1,6 @@
 // Grow's account-wide webhook: one call per payment, from any source (our shop, Monkeybook, payment links).
 // We keep each one in the "payments" form so the studio dashboard can count orders and income.
-// Grow sends a webhookKey; once GROW_WEBHOOK_KEY is set in Netlify, calls without it are refused.
+// Grow sends a webhookKey with every call; it must match GROW_WEBHOOK_KEY in Netlify.
 import { json, recordForm } from "./_shop.mjs";
 
 export default async (req) => {
@@ -11,7 +11,8 @@ export default async (req) => {
   const d = {};
   for (const [k, v] of Object.entries(p.data && typeof p.data === "object" ? p.data : p)) d[k.replace(/^data\[(.+)\]$/, "$1")] = v;
   const key = process.env.GROW_WEBHOOK_KEY;
-  if (key && String(d.webhookKey || p.webhookKey || "") !== key) return json({ error: "key" }, 403);
+  // Without the key anyone could add fake income, so nothing is kept until GROW_WEBHOOK_KEY is set.
+  if (!key || String(d.webhookKey || p.webhookKey || "") !== key) { console.error("grow-webhook refused: key", key ? "mismatch" : "not set", JSON.stringify(d).slice(0, 300)); return json({ error: "key" }, 403); }
   const s = (v) => (v == null ? "" : String(v)).slice(0, 300);
   await recordForm("payments", {
     tx: s(d.transactionCode || d.transactionId || d.asmachta), sum: s(d.paymentSum || d.sum), date: s(d.paymentDate),
