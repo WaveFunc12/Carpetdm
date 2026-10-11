@@ -95,8 +95,9 @@ section{position:relative}
   box-shadow:0 1px 0 rgba(255,255,255,.12) inset,0 18px 36px -20px rgba(20,40,44,.75);transition:width .55s cubic-bezier(.3,.9,.2,1)}
 .island::before{content:"";position:absolute;inset:5px;border:1.5px dashed rgba(246,240,229,.45);border-radius:5px;pointer-events:none}
 .island::after{content:"";position:absolute;inset-inline-end:-1px;top:50%;width:14px;height:22px;margin-top:-11px;background:var(--canvas);clip-path:polygon(100% 0,0 50%,100% 100%);opacity:.9}
-.brand{display:flex;align-items:center;flex:none;text-decoration:none;padding-inline-end:6px;border-radius:6px;position:relative}
-.brand img{width:96px;height:auto;filter:brightness(0) invert(1) opacity(.95)}
+/* The logo keeps its own colours on a light patch stitched onto the dark label. */
+.brand{display:flex;align-items:center;flex:none;text-decoration:none;padding:6px 10px;border-radius:6px;position:relative;background:#F6F0E5;outline:1.5px dashed rgba(36,70,76,.35);outline-offset:-4px}
+.brand img{width:98px;height:auto}
 .head-nav{display:flex;gap:2px;margin-inline:auto;max-width:720px;overflow:hidden;transition:max-width .5s ease,opacity .3s ease;position:relative}
 .nl{position:relative;padding:10px 13px;text-decoration:none;font:500 .98rem/1 var(--body);color:#D7E0DE;border-radius:6px;white-space:nowrap}
 .nl::after{content:"";position:absolute;inset-inline:13px;bottom:5px;height:0;border-bottom:2px dashed var(--mustard);transform:scaleX(0);transition:transform .3s ease}
@@ -115,14 +116,16 @@ section{position:relative}
   .site-head.cta-live:not(.is-down) .head-nav{max-width:720px;opacity:1}
   .site-head.cta-live:not(.is-down) .live{max-width:0;opacity:0}
 }
-@media (min-width:1000px) and (max-width:1180px){.nl{padding-inline:9px}.brand img{width:84px}}
+@media (min-width:1000px) and (max-width:1180px){.nl{padding-inline:9px}.brand img{width:88px}}
 @media (max-width:999px){
   :root{--head:74px}
   .site-head{top:10px}
   .island{height:56px;padding-inline:16px 7px}
-  .brand img{width:84px}
+  .brand img{width:92px}
+  .brand{padding:5px 9px}
   .head-nav,.head-cta,.live{display:none}
   .head-end{margin-inline-start:auto}
+  .island::after{display:none}
   .site-head.is-down:not(.menu-open){transform:translateY(-140%)}
   .menu-btn{display:inline-flex;align-items:center;gap:10px;min-height:42px;padding:0 16px;border:0;border-radius:5px;background:var(--mustard);color:var(--ink);font:500 1rem/1 var(--body);cursor:pointer;position:relative}
   .menu-btn .bars{width:16px;height:10px;position:relative}
@@ -626,7 +629,7 @@ dialog.co::backdrop{background:rgba(20,38,42,.55);-webkit-backdrop-filter:blur(3
 <!-- Meta pixel -->
 <script>!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version="2.0";n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,"script","https://connect.facebook.net/en_US/fbevents.js");fbq("init","1591343278262185");fbq("track","PageView");</script>
 <noscript><img height="1" width="1" style="display:none" alt="" src="https://www.facebook.com/tr?id=1591343278262185&amp;ev=PageView&amp;noscript=1"></noscript>
-<link rel="stylesheet" href="/assets/shop.css?v=4">
+<link rel="stylesheet" href="/assets/shop.css?v=5">
 </head>
 <body>
 <a class="skip" href="#main">דילוג לתוכן</a>
@@ -651,7 +654,7 @@ dialog.co::backdrop{background:rgba(20,38,42,.55);-webkit-backdrop-filter:blur(3
 <header class="site-head" id="siteHead">
   <div class="wrap head-in">
     <div class="island">
-      <a class="brand" href="#top" aria-label="Carpet DM, לראש הדף"><img src="images/web/logo.webp" width="872" height="498" alt="Carpet DM"></a>
+      <a class="brand" href="#top" aria-label="Carpet DM, לראש הדף"><img src="images/web/logo-patch.webp" width="382" height="121" alt="Carpet DM"></a>
       <nav class="head-nav" aria-label="בדף הזה">
         <a class="nl" href="#workshops">סדנאות</a>
         <a class="nl" href="#how">איך זה עובד</a>
@@ -1267,6 +1270,7 @@ dialog.co::backdrop{background:rgba(20,38,42,.55);-webkit-backdrop-filter:blur(3
           <li><a href="https://www.instagram.com/carpet___dm/">אינסטגרם</a> · <a href="https://www.tiktok.com/@carpet_dm">טיקטוק</a></li>
           <li><a href="/terms/">תנאי שימוש וביטולים</a></li>
           <li><a href="/cancel/">ביטול עסקה</a></li>
+          <li><a href="/studio/">לוח הסטודיו (בבדיקה)</a></li>
           <li><a href="/privacy/">מדיניות פרטיות</a></li>
           <li><a href="/accessibility/">הצהרת נגישות</a></li>
           <li><span lang="en">English</span>: <a href="#workshops" lang="en">workshops in English</a></li>
@@ -1836,6 +1840,6 @@ window.addEventListener("DOMContentLoaded", () => {
   </div>
 </dialog>
 
-<script src="/assets/shop.js?v=4" defer></script>
+<script src="/assets/shop.js?v=5" defer></script>
 </body>
 </html>

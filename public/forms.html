@@ -2,4 +2,7 @@
 <!-- Netlify reads these at deploy time. The shop server posts orders to "orders"; Netlify emails each one to the studio. -->
 <form name="orders" data-netlify="true" hidden><input name="order_id"><input name="status"><textarea name="items"></textarea><input name="total"><input name="full_name"><input name="phone"><input name="email"><input name="delivery"><input name="address"><textarea name="notes"></textarea><input name="transaction"></form>
 <form name="newsletter" data-netlify="true" netlify-honeypot="bot-field" hidden><input name="email"><input name="bot-field"></form>
+<!-- Every payment Grow reports (its webhook), and what the studio marks as done in its dashboard. -->
+<form name="payments" data-netlify="true" hidden><input name="tx"><input name="sum"><input name="date"><input name="desc"><input name="source"><input name="page"><input name="name"><input name="phone"><input name="email"><input name="payments_num"><input name="type"><input name="received"></form>
+<form name="studio-log" data-netlify="true" hidden><input name="type"><input name="ref"></form>
 </body></html>

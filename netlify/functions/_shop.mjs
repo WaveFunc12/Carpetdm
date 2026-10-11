@@ -24,11 +24,12 @@ export const growBase = () => process.env.GROW_BASE || (process.env.GROW_ENV ===
 export const siteUrl = () => (process.env.URL || "https://www.carpet-dm.com").replace(/\/$/, "");
 
 // Every order (and every payment) is posted to the Netlify form "orders"; Netlify emails it to the studio.
-export async function recordOrder(fields) {
-  const body = new URLSearchParams({ "form-name": "orders", ...fields });
+export const recordOrder = (fields) => recordForm("orders", fields);
+export async function recordForm(form, fields) {
+  const body = new URLSearchParams({ "form-name": form, ...fields });
   try {
     const r = await fetch(siteUrl() + "/", { method: "POST", headers: { "content-type": "application/x-www-form-urlencoded" }, body });
-    if (!r.ok) console.error("recordOrder failed: HTTP", r.status, "(is form detection on in Netlify > Forms?)");
+    if (!r.ok) console.error(`record ${form} failed: HTTP`, r.status, "(is form detection on in Netlify > Forms?)");
     return r.ok;
-  } catch (e) { console.error("recordOrder failed", e); return false; }
+  } catch (e) { console.error(`record ${form} failed`, e); return false; }
 }
