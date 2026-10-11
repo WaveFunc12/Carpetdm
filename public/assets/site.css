@@ -14,8 +14,8 @@
 /* Palette from Carpet DM's own colour logo: teal ink, terracotta, sand, mustard, lilac, on tufting-cloth cream. */
 :root{
   --canvas:#F6F0E5;--canvas-2:#EFE4D2;--sand:#E8D1B6;--card:#FBF8F2;
-  --ink:#24464C;--ink-2:#38595F;--muted:#5B6F72;--line:rgba(36,70,76,.15);--line-2:rgba(36,70,76,.28);
-  --terra:#D9987B;--terra-ink:#A65A3F;--mustard:#E0BE45;--mustard-2:#CFAA2E;--lilac:#BDB0C0;--lilac-2:#D9D0DC;
+  --ink:#24464C;--ink-2:#38595F;--muted:#4C6063;--line:rgba(36,70,76,.15);--line-2:rgba(36,70,76,.28);
+  --terra:#D9987B;--terra-ink:#924F39;--mustard:#E0BE45;--mustard-2:#CFAA2E;--lilac:#BDB0C0;--lilac-2:#D9D0DC;
   --display:Fredoka,"Rubik",system-ui,sans-serif;--body:Rubik,system-ui,-apple-system,"Segoe UI",Arial,sans-serif;
   --wrap:1200px;--gutter:clamp(16px,4vw,40px);--r:22px;--head:84px;
 }
@@ -43,7 +43,7 @@ section{position:relative}
 .sec{padding-block:clamp(72px,10vw,132px)}
 .eyebrow{display:inline-flex;align-items:center;gap:10px;font:500 .95rem/1.2 var(--body);color:var(--terra-ink);margin-bottom:16px}
 .eyebrow::before{content:"";width:12px;height:12px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#E9B39B,var(--terra) 60%,#B7735A)}
-.dark .eyebrow{color:var(--terra)}
+.dark .eyebrow{color:#E3A88E}
 .sec-h{font-size:clamp(2.1rem,4.8vw,3.75rem);max-width:17ch}
 .sec-lede{font-size:clamp(1.05rem,1.6vw,1.2rem);color:var(--muted);max-width:56ch;margin-top:18px}
 .dark .sec-lede{color:#C9D6D6}

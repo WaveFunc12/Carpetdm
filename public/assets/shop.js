@@ -66,6 +66,7 @@
     try { res = await fetch("/api/checkout", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify(payload) }); data = await res.json(); } catch { }
     go.disabled = false; render();
     if (res && res.ok && data.url) {
+      try { sessionStorage.setItem("cdm_order", JSON.stringify({ id: data.orderId, value: total() })); } catch { }
       $("#shopCart").hidden = true; $("#shopPay").hidden = false;
       $("#growOpen").href = data.url;
       const fr = document.createElement("iframe"); fr.title = "תשלום מאובטח ב-Grow"; fr.allow = "payment"; fr.src = data.url;
