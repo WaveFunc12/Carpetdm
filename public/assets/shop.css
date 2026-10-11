@@ -1,0 +1,27 @@
+/* Shop checkout sheet (home page). Uses the home page's .co / .sheet / .field / .co-sum styles. */
+.shop-sheet{max-width:600px}
+.shop-sheet .x{z-index:3}
+.shop-sheet h3{padding-inline-end:48px}
+.shop-lines{display:grid;gap:8px;margin:14px 0 20px}
+.shop-lines li{display:grid;grid-template-columns:1fr auto auto;gap:10px;align-items:center;padding:10px 12px;border-radius:14px;background:var(--canvas)}
+.shop-lines .nm{font-size:.95rem;line-height:1.3}
+.shop-lines .pr{font:600 1rem/1 var(--display);white-space:nowrap}
+.qty{display:inline-flex;align-items:center;border-radius:999px;box-shadow:inset 0 0 0 1.5px var(--line-2)}
+.qty button{width:36px;height:36px;border:0;background:none;cursor:pointer;font-size:1.1rem;border-radius:50%}
+.qty span{min-width:22px;text-align:center;font-weight:500}
+.ship{display:grid;gap:8px}
+.ship label{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 14px;border-radius:14px;background:#fff;box-shadow:inset 0 0 0 1.5px var(--line-2);cursor:pointer}
+.ship label:has(input:checked){box-shadow:inset 0 0 0 2px var(--ink);background:var(--canvas)}
+.ship label.off{opacity:.55;cursor:not-allowed}
+.ship input{accent-color:var(--ink);width:18px;height:18px;margin:0}
+.ship span{flex:1}
+.ship b{font-weight:500;white-space:nowrap}
+.grid2{display:grid;gap:12px}
+@media (min-width:560px){.grid2{grid-template-columns:1fr 1fr}}
+.req{color:var(--terra-ink)}
+.check{display:flex;align-items:flex-start;gap:10px;font-size:.95rem;cursor:pointer}
+.check input{width:20px;height:20px;margin:2px 0 0;accent-color:var(--ink);flex:none}
+.form-err{display:none;padding:12px 14px;border-radius:12px;background:#FBE9E3;color:#7E2C17;font-size:.93rem;margin-top:12px}
+.form-err.show{display:block}
+.shop-empty{padding:18px;text-align:center;color:var(--muted)}
+.honey{position:absolute!important;inset-inline-start:-9999px}

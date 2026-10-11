@@ -1,0 +1,5 @@
+<!doctype html><html lang="he" dir="rtl"><head><meta charset="utf-8"><meta name="robots" content="noindex"><title>forms</title></head><body>
+<!-- Netlify reads these at deploy time. The shop server posts orders to "orders"; Netlify emails each one to the studio. -->
+<form name="orders" data-netlify="true" hidden><input name="order_id"><input name="status"><textarea name="items"></textarea><input name="total"><input name="full_name"><input name="phone"><input name="email"><input name="delivery"><input name="address"><textarea name="notes"></textarea><input name="transaction"></form>
+<form name="newsletter" data-netlify="true" netlify-honeypot="bot-field" hidden><input name="email"><input name="bot-field"></form>
+</body></html>

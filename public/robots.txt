@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /forms.html
+Disallow: /shop/
+Sitemap: https://www.carpet-dm.com/sitemap.xml
